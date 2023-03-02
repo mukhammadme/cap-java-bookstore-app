@@ -1,6 +1,30 @@
 ---
 spring:
+  web.resources.static-locations: "file:./app"
   config.activate.on-profile: default
+  # datasource:
+  #   url: jdbc:sqlite:D://Projects//CAP//CAP-JAVA//bookstore//mydb.db.sqlite
+  #   driver-class-name: org.sqlite.JDBC
+  #   initialization-mode: never
+  #   hikari:
+  #     maximum-pool-size: 1
 cds:
-  datasource:
+  dataSource:
     auto-config.enabled: false
+  sql:
+    supportedLocales: "en,de,fr,ja,es,zh,zh_CN,pt,pt_BR,ru,en_US_x_sappsd"
+  locales:
+    normalization:
+      includeList:
+      - pt-BR
+      - zh-CN
+  
+  odata-v4.endpoint.path: "/api"
+  security.mock.users:
+    - name: admin
+      password: admin
+    - name: user
+      password: user
+logging:
+  level:
+    web: DEBUG
