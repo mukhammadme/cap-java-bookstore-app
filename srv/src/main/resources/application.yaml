@@ -20,11 +20,31 @@ cds:
       - zh-CN
   
   odata-v4.endpoint.path: "/api"
-  security.mock.users:
-    - name: admin
-      password: admin
-    - name: user
-      password: user
+  security:
+    mock.users:
+      admin:
+        password: admin
+      user:
+        password: user
+logging:
+  level:
+    web: DEBUG
+
+---
+spring:
+  config.activate.on-profile: cloud
+  application.name: bookstore
+  
+cds:
+  dataSource:
+    auto-config.enabled: false
+  sql:
+    supportedLocales: "en,de,fr,ja,es,zh,zh_CN,pt,pt_BR,ru,en_US_x_sappsd"
+  locales:
+    normalization:
+      includeList:
+      - pt-BR
+      - zh-CN
 logging:
   level:
     web: DEBUG

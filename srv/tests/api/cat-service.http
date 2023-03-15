@@ -1,10 +1,11 @@
 ### Get all books
-GET http://localhost:8080/odata/v4/CatalogService/Books
-?sap-language=zh-CN
+GET http://localhost:8080/api/browse/Books
+?sap-language=pt-BR
 &$expand=texts,localized
+Authorization: Basic system:
 # Accept-Language: 2Q
 ### Create a book
-POST http://localhost:8080/odata/v4/CatalogService/Books HTTP/1.1
+POST http://localhost:8080/api/browse/Books HTTP/1.1
 Content-Type: application/json
 
 {
@@ -16,10 +17,10 @@ Content-Type: application/json
 }
 
 ### Get the book
-GET http://localhost:8080/odata/v4/CatalogService/Books(id=1) HTTP/1.1
+GET http://localhost:8080/api/browse/Books(id=1) HTTP/1.1
 
 ### Update the book
-PATCH http://localhost:8080/odata/v4/CatalogService/Books(1) HTTP/1.1
+PATCH http://localhost:8080/api/browse/Books(1) HTTP/1.1
 content-type: application/json
 
 {
@@ -27,5 +28,5 @@ content-type: application/json
 }
 
 ### Delete the book
-DELETE http://localhost:8080/odata/v4/CatalogService/Books(id=1) HTTP/1.1
+DELETE http://localhost:8080/api/browse/Books(id=1) HTTP/1.1
 content-type: application/json

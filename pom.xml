@@ -15,10 +15,11 @@
 		<revision>1.0.0-SNAPSHOT</revision>
 
 		<!-- DEPENDENCIES VERSION -->
-		<jdk.version>17</jdk.version>
+		<jdk.version>11</jdk.version>
 		<cds.services.version>1.32.0</cds.services.version>
 		<spring.boot.version>2.7.8</spring.boot.version>
 		<cds.install-cdsdk.version>6.5.2</cds.install-cdsdk.version>
+    <maven.compiler.release>11</maven.compiler.release>
 
 		<cds.install-node.downloadUrl>https://nodejs.org/dist/</cds.install-node.downloadUrl>
 	</properties>
@@ -56,7 +57,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
 				<configuration>
-					<release>${jdk.version}</release>
+					<release>${maven.compiler.release}</release>
 				</configuration>
 			</plugin>
 

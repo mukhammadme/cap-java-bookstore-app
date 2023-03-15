@@ -1,0 +1,48 @@
+_schema-version: '3.1'
+ID: bookstore
+version: 1.0.0-SNAPSHOT
+description: "bookstore application"
+parameters:
+  enable-parallel-deployments: true
+modules:
+  - name: bookstore-srv
+    type: java
+    path: srv
+    parameters:
+      memory: 1024M
+      disk-quota: 512M
+      buildpack: sap_java_buildpack
+    properties:
+      SPRING_PROFILES_ACTIVE: cloud
+      JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+      JBP_CONFIG_SAP_MACHINE_JRE: '{ use_offline_repository: false, version: 11.+ }'
+    build-parameters:
+      builder: custom
+      commands:
+        - mvn clean package -DskipTests=true
+      build-result: target/*-exec.jar
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: bookstore-db
+
+  - name: bookstore-db-deployer
+    type: hdb
+    path: db
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: custom
+      commands:
+        - npm run build
+    requires:
+      - name: bookstore-db
+
+resources:
+  - name: bookstore-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
